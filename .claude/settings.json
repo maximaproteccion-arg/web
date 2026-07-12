@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\"---\")",
+      "WebFetch(domain:www.guiadelaplata.com)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:www.maximaproteccion.com.ar)",
+      "PowerShell(\"--- .claude ---\")",
+      "WebFetch(domain:maximaproteccion.com.ar)",
+      "WebFetch(domain:www.argentino.com.ar)",
+      "WebFetch(domain:www.dateas.com)",
+      "WebFetch(domain:alarmasparalacasa.com.ar)",
+      "WebFetch(domain:archive.org)",
+      "WebFetch(domain:www.cuitonline.com)",
+      "WebFetch(domain:web.archive.org)",
+      "Bash(curl -sL --max-time 60 \"http://web.archive.org/web/20251010123649/http://maximaproteccion.com.ar/\" -o maxpro_snapshot.html)",
+      "Bash(curl -sL --max-time 90 \"https://www.mseg.gba.gov.ar/areas/dirprovsegpriv/listados/PRESTADORAS%20HABILITADAS%20AL%2008072024.pdf\" -o prestadoras2024.pdf)",
+      "Bash(python -c ' *)",
+      "Bash(curl -s --max-time 60 \"http://web.archive.org/cdx/search/cdx?url=maximaproteccion.com.ar&output=text&fl=timestamp,statuscode,original&collapse=timestamp:6&limit=60\")",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20241218195606/https://maximaproteccion.com.ar/\" -o snap2024.html)",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20210919233937/http://maximaproteccion.com.ar/\" -o snap2021.html)",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20090302142344/http://maximaproteccion.com.ar/\" -o snap2009.html)",
+      "Bash(python -X utf8 -c ' *)",
+      "Bash(python -X utf8 pdfgrep.py prestadoras2024.pdf MAXIMA)",
+      "Bash(curl -s --max-time 60 \"http://web.archive.org/cdx/search/cdx?url=maximaproteccion.com.ar*&output=text&fl=original,timestamp,statuscode&collapse=urlkey&limit=100\")",
+      "Bash(curl -s --max-time 60 \"http://web.archive.org/cdx/search/cdx?url=maximaproteccion.com.ar*&output=text&fl=original,timestamp,statuscode&collapse=urlkey&filter=mimetype:text/html\")",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20090125043608/http://maximaproteccion.com.ar:80/quienes%20somos.htm\" -o quienes2009.html)",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20130302014658/http://www.maximaproteccion.com.ar:80/servicios.html\" -o servicios2013.html)",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20240423114441/https://maximaproteccion.com.ar/seccion-empresa-783\" -o empresa2024.html)",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20240423100403/https://maximaproteccion.com.ar/seccion-beneficios-784\" -o beneficios2024.html)",
+      "Bash(curl -sL --max-time 90 \"http://web.archive.org/web/20240423115139/https://maximaproteccion.com.ar/\" -o home2024.html)",
+      "WebFetch(domain:www.analisisdigital.com.ar)",
+      "WebFetch(domain:www.cemara.org.ar)",
+      "Read(//c/Users/Usuario/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/**)",
+      "Bash(\"/c/Users/Usuario/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/scripts/start-server.sh\" --project-dir \"/c/Users/Usuario/Desktop/maxproteccion-web\")",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)"
+    ]
+  }
+}
