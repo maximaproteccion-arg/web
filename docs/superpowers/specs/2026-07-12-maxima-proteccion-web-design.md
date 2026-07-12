@@ -20,12 +20,11 @@ Confirmados con fuente primaria durante la investigación:
 | Habilitación | Prestadora N° 1739, Ministerio de Seguridad PBA | [Listado oficial PDF, 08/07/2024](https://www.mseg.gba.gov.ar/areas/dirprovsegpriv/listados/PRESTADORAS%20HABILITADAS%20AL%2008072024.pdf) |
 | Marco legal | Ley 12.297; Seguro de Vida, Responsabilidad Civil y ART | Web propia archivada, 2024 |
 | Trayectoria | "Más de 25 años en la ciudad" | Web propia archivada, 2024 |
-| Domicilio | Calle 23 N° 656, e/ 45 y 46, La Plata | Web propia archivada + directorios |
-| WhatsApp | 221 613-6661 | Web propia archivada, 2024 |
-| Teléfonos | 0221 470-6262 / 0221 479-2520 | Guía de La Plata |
 | Redes | facebook.com/maximaproteccion.ar · instagram.com/maximaproteccion.ar | HTML de la web archivada |
 
-**PENDIENTE DE CONFIRMAR CON EL CLIENTE antes de publicar:** teléfonos, WhatsApp y domicilio salen de fuentes archivadas de 2024. Deben ser validados como vigentes. Publicar un teléfono muerto en un sitio de seguridad destruye la confianza que el sitio intenta construir.
+**Datos de contacto: DESCARTADOS.** El cliente confirmó que el WhatsApp, los teléfonos y el domicilio que aparecían en fuentes archivadas **están desactualizados**. No se publican. Habrá datos nuevos, todavía no definidos.
+
+Consecuencia de diseño: los datos de contacto se tratan **con el mismo mecanismo que el producto** — viven en `empresa.ts`, arrancan en `null`, y los componentes se adaptan a su ausencia. No se escriben a mano en ningún lado.
 
 **Dato descartado explícitamente:** apareció en búsquedas una supuesta sanción de 2008 por operar sin habilitación. No tiene fuente primaria localizable y podría corresponder a una empresa homónima. No se usa ni se menciona.
 
@@ -86,6 +85,30 @@ Un componente por sección. Cuando haya que cambiar la comparativa se abre un ar
 
 El número de WhatsApp aparece en cinco lugares (header, hero, botón flotante, contacto, footer). En un solo archivo, cambiarlo es cambiarlo una vez. Escrito a mano, tarde o temprano se cambian cuatro de cinco y el quinto sigue mandando gente a un número viejo.
 
+```ts
+export const empresa = {
+  // Verificados contra fuente primaria. Se publican.
+  razonSocial: "MAXIMA PROTECCION LA PLATA S.A.",
+  cuit: "30-71103275-0",
+  prestadora: "1739",   // Ministerio de Seguridad PBA, Ley 12.297
+  anios: 25,
+  ciudad: "La Plata",
+  redes: { facebook: "...", instagram: "..." },
+
+  // PENDIENTES. Los viejos están desactualizados y NO se publican.
+  whatsapp: null,   // ← al completarlo se activan todos los CTA del sitio
+  telefono: null,
+  direccion: null,
+  horario: null,
+}
+```
+
+**Comportamiento con `whatsapp: null`:** los CTA se renderizan visualmente (el diseño se ve completo y se puede evaluar) pero **no son clicables** y muestran "Próximamente". No se renderiza ningún enlace `wa.me` roto ni que apunte a un número equivocado.
+
+**Bloqueante para publicar:** el sitio **no se publica** con `whatsapp: null`. Una landing cuya única vía de conversión está desactivada no tiene razón de existir. Se construye ahora, se publica cuando llegue el número.
+
+**Comportamiento con `direccion: null`:** no se renderiza el bloque de dirección, y los datos estructurados degradan de `LocalBusiness` a `Organization` (Google exige dirección para `LocalBusiness`; declararlo sin ella es un dato estructurado inválido). Al completar la dirección, vuelve a `LocalBusiness` automáticamente.
+
 ### `producto.ts` — preparado para el producto que todavía no existe
 
 ```ts
@@ -119,17 +142,19 @@ En orden, de arriba hacia abajo:
 3. **Franja de credibilidad** — 25 años · Prestadora N° 1739 · Empresa platense · Ley 12.297 con seguros.
 4. **La alarma** — galería y características, todo desde `producto.ts`.
 5. **Cómo funciona** — tres pasos: la instalamos / la controlás desde la app / te avisa al instante. Desactiva el miedo a que sea complicado.
-6. **Comparativa** — tabla de tres columnas: kit de internet / Máxima Protección / multinacional. **Es la sección que cierra la venta:** Máxima Protección es la única columna que dice "no" al abono *y* "sí" a instalación, garantía, habilitación y oficina física.
+6. **Comparativa** — tabla de tres columnas: kit de internet / Máxima Protección / multinacional. **Es la sección que cierra la venta:** Máxima Protección es la única columna que dice "no" al abono *y* "sí" a instalación, garantía y habilitación oficial.
+
+   La fila *"¿a quién le reclamás?"* se apoya en la **habilitación oficial N° 1739 y los 25 años**, no en la dirección (que hoy no se publica): *kit de internet → a nadie / multinacional → a un call center / Máxima Protección → a una empresa habilitada, con nombre, CUIT y 25 años en la ciudad*. Cuando haya dirección nueva, la fila puede reforzarse con la oficina física.
 7. **Por qué Máxima Protección** — los 25 años contados como historia, no como dato suelto.
 8. **Preguntas frecuentes** — incluye obligatoriamente *"¿y si no estoy mirando el celular?"*, que es la objeción real al automonitoreo.
-9. **Contacto** — WhatsApp, teléfono, oficina, horario.
-10. **Footer** — datos legales completos: razón social, CUIT, número de prestadora, ley, redes.
+9. **Contacto** — se adapta a `empresa.ts`. Hoy: WhatsApp desactivado con "Próximamente" y redes sociales. Sin dirección ni teléfono. Al completar los datos, la sección crece sola.
+10. **Footer** — datos legales: razón social, CUIT, número de prestadora, ley, redes. Todos verificados y publicables hoy.
 
-Más un **botón flotante de WhatsApp** presente durante todo el scroll.
+Más un **botón flotante de WhatsApp** presente durante todo el scroll (desactivado mientras `whatsapp` sea `null`).
 
 ## 5. SEO y despliegue
 
-- Datos estructurados `LocalBusiness` (JSON-LD) con dirección, teléfono y horarios, para que Google los muestre en el buscador.
+- Datos estructurados JSON-LD. **Hoy `Organization`** (razón social, CUIT, redes); **degradan/ascienden solos según `empresa.ts`**: al cargar dirección y teléfono, pasan a `LocalBusiness`, que es el que hace que Google muestre el negocio en el mapa y con sus horarios. Declarar `LocalBusiness` sin dirección sería un dato estructurado inválido, así que no se hace.
 - Meta tags y Open Graph.
 - `sitemap.xml` y `robots.txt`.
 - Keywords objetivo: *alarmas La Plata*, *alarma sin abono La Plata*, *alarma automonitoreada*.
@@ -160,8 +185,10 @@ Antes de dar por terminado, con el sitio corriendo:
 
 | Pendiente | Impacto |
 |---|---|
-| Confirmar teléfonos, WhatsApp y dirección vigentes | **Bloqueante para publicar** |
+| **Número de WhatsApp nuevo** | **Bloqueante para publicar.** Es la única vía de conversión del sitio. Sin él, la landing no puede vender. No bloquea el desarrollo |
 | Confirmar que la habilitación N° 1739 sigue vigente en 2026 | **Bloqueante.** El listado verificado es de julio 2024. El sitio lo afirma; debe estar vigente |
 | Limpiar el rastro del hackeo en Google (Search Console, desindexado del spam) | **Bloqueante para publicar en el dominio propio** |
+| Dirección nueva | No bloquea. Sin ella el sitio funciona, pero se pierde el posicionamiento en el mapa de Google y la comparativa pierde algo de fuerza |
 | Modelo, fotos, precio y características del producto | No bloquea. El sitio se publica con placeholders y se completa después |
 | Dominio `maximaproteccion.com.ar` | ✅ Resuelto: el cliente lo tiene |
+| Repositorio GitHub | ✅ Resuelto: `maximaproteccion-arg/web` |
