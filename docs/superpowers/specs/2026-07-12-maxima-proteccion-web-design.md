@@ -47,6 +47,9 @@ La crítica estándar de la industria al automonitoreo es: *"una notificación a
 | Stack | Astro + Tailwind, salida estática. Deploy en Netlify / Cloudflare Pages |
 | Dirección visual | Fondo claro y aireado; tipografía en azul marino; amarillo sólo en elementos accionables |
 | Paleta | Derivada exclusivamente del logo: azul marino `#1B3A6B`, amarillo `#F0A81C`, azul profundo `#0E1F3A` para footer y franjas de acento, blanco |
+| Tipografía | Inter (variable, self-hosted); wordmark del header con tracking amplio |
+| Marca y modelo del equipo | **No se publican** (18/07/2026): se destacan funcionalidades para que el cliente no busque el equipo y compare precios. Vale para textos, códigos de producto, nombres de archivo de imágenes y alt |
+| Precios | **No se publican** (18/07/2026): se informan por WhatsApp. `check-dist` falla si aparece un precio o la marca en el HTML |
 
 ### Argumento comercial central
 

@@ -1,6 +1,8 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
 
 @theme {
+  --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
   --color-navy: #1b3a6b;
   --color-navy-deep: #0e1f3a;
   --color-gold: #f0a81c;

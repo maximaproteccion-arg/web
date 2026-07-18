@@ -1,5 +1,6 @@
-// Catálogo de accesorios Zenity Smart compatibles con el panel ZN10 PRO.
-// `precio` es el precio FINAL de venta al público, en pesos argentinos.
+// Catálogo de accesorios compatibles con el panel.
+// `codigo` y `precio` son datos INTERNOS: no se renderizan en el sitio
+// (decisión comercial 18/07/2026 — sin marca, modelo ni precios publicados).
 // Los items con stock "sin-stock" no se muestran en el sitio.
 
 export type Stock = "stock" | "consultar" | "sin-stock";
@@ -95,7 +96,7 @@ export const accesorios: Accesorio[] = [
     codigo: "CP-B10",
     nombre: "Timbre inteligente",
     categoria: "Controles",
-    descripcion: "Compatible con el sistema Zenity Smart.",
+    descripcion: "Integrado al mismo sistema y a la misma app.",
     precio: 14700,
     stock: "stock",
   },
@@ -150,7 +151,7 @@ export const accesorios: Accesorio[] = [
     codigo: "REL-ZENITY",
     nombre: "Relay para sirenas cableadas",
     categoria: "Ampliación e instalación",
-    descripcion: "Conecta sirenas cableadas al panel Zenity.",
+    descripcion: "Conecta sirenas cableadas al panel.",
     precio: 12180,
     stock: "stock",
   },
