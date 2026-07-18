@@ -1,0 +1,74 @@
+---
+import { producto } from "../data/producto";
+import CtaWhatsapp from "./CtaWhatsapp.astro";
+import FotoProducto from "./FotoProducto.astro";
+
+const iconos: Record<string, string> = {
+  app: "M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm5 16h.01",
+  video:
+    "M23 7l-7 5 7 5V7ZM1 7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7Z",
+  bell: "M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9Zm-4.27 13a2 2 0 0 1-3.46 0",
+};
+
+const titulo = producto.nombre
+  ? `${producto.marca ? producto.marca + " " : ""}${producto.nombre}`
+  : "Conocé nuestra nueva alarma automonitoreada";
+---
+
+<section id="la-alarma" class="scroll-mt-20">
+  <div class="mx-auto grid max-w-6xl items-start gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
+    <FotoProducto />
+    <div>
+      {
+        !producto.disponible && (
+          <span class="mb-4 inline-block rounded-full bg-gold-soft px-4 py-1 text-xs font-bold tracking-wide text-navy uppercase">
+            Próximamente
+          </span>
+        )
+      }
+      <h2 class="text-3xl font-extrabold tracking-tight text-navy">{titulo}</h2>
+      <ul class="mt-8 space-y-6">
+        {
+          producto.caracteristicas.map((c) => (
+            <li class="flex gap-4">
+              <span class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-navy text-gold">
+                <svg
+                  class="size-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={iconos[c.icono]} />
+                </svg>
+              </span>
+              <div>
+                <h3 class="font-bold text-navy">{c.titulo}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-navy/70">{c.descripcion}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        producto.especificaciones.length > 0 && (
+          <dl class="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 rounded-xl bg-cloud p-5 text-sm">
+            {producto.especificaciones.map((e) => (
+              <>
+                <dt class="font-semibold text-navy/60">{e.etiqueta}</dt>
+                <dd class="font-bold text-navy">{e.valor}</dd>
+              </>
+            ))}
+          </dl>
+        )
+      }
+      {producto.precio && <p class="mt-8 text-3xl font-extrabold text-navy">{producto.precio}</p>}
+      <div class="mt-8">
+        <CtaWhatsapp texto={producto.disponible ? "Quiero la mía" : "Avisame cuando esté"} grande />
+      </div>
+    </div>
+  </div>
+</section>

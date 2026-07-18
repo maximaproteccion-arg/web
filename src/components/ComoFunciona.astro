@@ -1,0 +1,38 @@
+---
+const pasos = [
+  {
+    titulo: "La instalamos",
+    detalle:
+      "Técnicos propios, instalación prolija y garantizada. Te vas con la app configurada y sabiendo usarla.",
+  },
+  {
+    titulo: "La controlás",
+    detalle:
+      "Desde tu celular: armás, desarmás y ves el estado de tu casa desde cualquier lugar.",
+  },
+  {
+    titulo: "Te avisa al instante",
+    detalle:
+      "Ante cualquier evento te llega la notificación en el momento. Vos decidís qué hacer, con información real.",
+  },
+];
+---
+
+<section id="como-funciona" class="scroll-mt-20 border-y border-navy/10 bg-cloud">
+  <div class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+    <h2 class="text-center text-3xl font-extrabold tracking-tight text-navy">Así de simple</h2>
+    <div class="mt-12 grid gap-8 md:grid-cols-3">
+      {
+        pasos.map((p, i) => (
+          <div class="rounded-2xl bg-white p-7 shadow-sm">
+            <span class="flex size-10 items-center justify-center rounded-full bg-gold text-lg font-extrabold text-navy-deep">
+              {i + 1}
+            </span>
+            <h3 class="mt-4 text-lg font-bold text-navy">{p.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-navy/70">{p.detalle}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
