@@ -1,0 +1,44 @@
+---
+import { empresa } from "../data/empresa";
+import { datosEstructurados } from "../lib/jsonld";
+import "../styles/global.css";
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+}
+
+const {
+  titulo = "Alarma automonitoreada sin abono en La Plata | Máxima Protección",
+  descripcion = "Alarma automonitoreada sin abono mensual: te avisa a tu celular al instante. Instalada y garantizada por Máxima Protección, empresa platense con más de 25 años, prestadora N° 1739 del Ministerio de Seguridad de la Provincia de Buenos Aires.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/images/logo-mp.jpg", Astro.site);
+const jsonld = JSON.stringify(datosEstructurados(empresa));
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content={empresa.nombreComercial} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={jsonld} />
+  </head>
+  <body class="bg-white font-sans text-navy antialiased">
+    <slot />
+  </body>
+</html>
