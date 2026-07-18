@@ -192,3 +192,36 @@ Antes de dar por terminado, con el sitio corriendo:
 | Modelo, fotos, precio y características del producto | No bloquea. El sitio se publica con placeholders y se completa después |
 | Dominio `maximaproteccion.com.ar` | ✅ Resuelto: el cliente lo tiene |
 | Repositorio GitHub | ✅ Resuelto: `maximaproteccion-arg/web` |
+
+## 8. Checklist para un sitio profesional (más allá del código)
+
+Relevado a pedido del cliente: qué falta, además de los datos del producto, para que la página esté a la altura de una empresa destacada del rubro.
+
+### Material que aporta el cliente
+
+| Ítem | Para qué | Estado |
+|---|---|---|
+| Logo original en vectorial (SVG/AI/Corel) o PNG grande con transparencia | Header, favicon, tarjeta de WhatsApp. El JPG actual es de 500 px con fondo blanco | Pendiente. Si no existe, se redibuja como SVG |
+| Fotos reales: técnicos, móviles, central de monitoreo, equipo | Único activo visual que la competencia no puede fingir. Stock = genérico | Pendiente |
+| 2-3 testimonios de clientes reales, con nombre y barrio (con permiso) | En seguridad, la palabra de un vecino vale más que cualquier copy | Pendiente |
+| Año exacto de fundación + 2-3 hitos de la historia | Sección "Por qué nosotros". Hoy sólo hay "más de 25 años" | Pendiente |
+| Zona de cobertura (localidades) | Texto, SEO local, filtrar consultas fuera de zona | Pendiente |
+| Horario de atención nuevo | Sección contacto, ficha de Google | Pendiente (junto con WhatsApp) |
+
+### Presencia externa
+
+| Ítem | Para qué | Estado |
+|---|---|---|
+| Ficha de Google Business Profile | El recuadro con mapa y reseñas en "alarmas La Plata". Pesa tanto o más que la web en búsquedas locales | Requiere dirección nueva |
+| Email corporativo `contacto@maximaproteccion.com.ar` | Un Gmail en la web de una empresa de seguridad resta | Sólo configurarlo; el dominio ya está |
+| Redes sociales activas | El sitio las linkea; si la última publicación es vieja, revisar antes de mandar tráfico | A revisar por el cliente |
+
+### Técnico y legal (lo resuelve Claude, con accesos del cliente)
+
+| Ítem | Para qué |
+|---|---|
+| Google Search Console | Limpiar el rastro del hackeo + medir posicionamiento |
+| Analítica liviana (medir visitas y clics en WhatsApp) | Saber si el sitio vende. Sin esto no hay forma de evaluarlo |
+| Imagen Open Graph (tarjeta al compartir el link por WhatsApp) | El canal de venta es WhatsApp: esa tarjeta es marketing puro |
+| Política de privacidad + QR Data Fiscal AFIP | Legales estándar de sitio comercial argentino |
+| Acceso al panel NIC.ar / DNS | Apuntar el dominio al sitio nuevo al publicar |
