@@ -42,8 +42,17 @@ Después de cualquier cambio: `npm run verify`.
 
 ## Deploy
 
-Estático puro: Netlify o Cloudflare Pages. Build: `npm run build`, output: `dist/`.
-Dominio: maximaproteccion.com.ar (en poder del cliente).
+**Preview actual:** https://lexagisargentina.github.io/ (GitHub Pages, repo
+`lexagisargentina/lexagisargentina.github.io`). Lleva `noindex` para que Google
+no lo indexe: es solo para revisar.
+
+Proceso: `npm run verify`, copiar `dist/` al repo de Pages (agregando
+`.nojekyll` y el meta `noindex`) y pushear a `main`.
+
+**Producción (cuando se levanten los bloqueantes):** el dominio
+maximaproteccion.com.ar está comprado en NIC.ar. Falta elegir host definitivo
+(el mismo GitHub Pages con dominio propio, o Cloudflare Pages) y apuntar el DNS.
+Al pasar a producción, quitar el `noindex` y dar de baja el preview.
 
 ## Documentación
 
