@@ -1,0 +1,56 @@
+---
+import { empresa } from "../data/empresa";
+
+// La fila "¿A quién le reclamás?" se apoya en la habilitación oficial,
+// no en la dirección: hoy no se publica domicilio (spec §4.6).
+const filas = [
+  { concepto: "Abono mensual", kit: "No", mp: "No", multi: "Sí, y aumenta" },
+  { concepto: "Instalación", kit: "Te arreglás solo", mp: "Profesional, incluida", multi: "Sí" },
+  { concepto: "Garantía y servicio técnico", kit: "—", mp: "Sí, acá en La Plata", multi: "Call center" },
+  {
+    concepto: "¿A quién le reclamás?",
+    kit: "A nadie",
+    mp: `A una empresa habilitada, con CUIT y ${empresa.anios} años en la ciudad`,
+    multi: "A un call center",
+  },
+  {
+    concepto: "Habilitación oficial",
+    kit: "No tiene",
+    mp: `Prestadora N° ${empresa.prestadora} (PBA)`,
+    multi: "Sí",
+  },
+];
+---
+
+<section class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+  <h2 class="text-center text-3xl font-extrabold tracking-tight text-navy">
+    Comparanos, en serio
+  </h2>
+  <p class="mx-auto mt-3 max-w-2xl text-center text-navy/70">
+    Lo mismo que un kit de internet no te da, y lo mismo que a una multinacional le sobra cobrarte.
+  </p>
+  <div class="mt-10 overflow-x-auto">
+    <table class="w-full min-w-[640px] border-collapse text-sm">
+      <thead>
+        <tr class="bg-navy text-white">
+          <th class="rounded-tl-xl p-4 text-left font-semibold"></th>
+          <th class="p-4 font-semibold">Kit de internet</th>
+          <th class="bg-gold p-4 font-extrabold text-navy-deep">Máxima Protección</th>
+          <th class="rounded-tr-xl p-4 font-semibold">Multinacional</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          filas.map((f) => (
+            <tr class="border-b border-navy/10">
+              <th class="p-4 text-left font-bold text-navy">{f.concepto}</th>
+              <td class="p-4 text-center text-navy/70">{f.kit}</td>
+              <td class="bg-gold-soft p-4 text-center font-bold text-navy">{f.mp}</td>
+              <td class="p-4 text-center text-navy/70">{f.multi}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
