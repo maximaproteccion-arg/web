@@ -43,7 +43,10 @@
       "Bash(curl -s -o /dev/null -w \"robots: HTTP %{http_code}\\\\n\" http://localhost:4321/robots.txt)",
       "Bash(curl -s -o /dev/null -w \"sitemap: HTTP %{http_code}\\\\n\" http://localhost:4321/sitemap-index.xml)",
       "Bash(kill %1)",
-      "Bash(grep -o '\\\\$304\\\\.500\\\\|\\\\$31\\\\.500\\\\|\\\\$132\\\\.300\\\\|\\\\$252\\\\.000\\\\|Consultar stock\\\\|ZN12' dist/index.html)"
+      "Bash(grep -o '\\\\$304\\\\.500\\\\|\\\\$31\\\\.500\\\\|\\\\$132\\\\.300\\\\|\\\\$252\\\\.000\\\\|Consultar stock\\\\|ZN12' dist/index.html)",
+      "Bash(mkdir -p producto)",
+      "Bash(mv \"Kitalarmazenityxn10proloragwifiappsensorescontrol.webp\" \"producto/kit-zn10-pro.webp\")",
+      "Bash(mv \"CP-D02-Lora.jpg\" \"producto/sensor-puerta-cp-d02.jpg\")"
     ]
   }
 }

@@ -18,7 +18,10 @@ export const producto: Producto = {
   disponible: true,
   nombre: "ZN10 PRO",
   marca: "Zenity Smart",
-  fotos: [], // PENDIENTE: copiar fotos a public/images/producto/ y listarlas acá
+  fotos: [
+    "/images/producto/kit-zn10-pro.webp",
+    "/images/producto/sensor-puerta-cp-d02.jpg",
+  ],
   caracteristicas: [
     {
       icono: "app",
