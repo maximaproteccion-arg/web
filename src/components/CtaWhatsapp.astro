@@ -5,9 +5,11 @@ import { waHref } from "../lib/whatsapp";
 interface Props {
   texto?: string;
   grande?: boolean;
+  /** En espacios angostos (header) oculta el sufijo "Próximamente" salvo en lg+ */
+  compacto?: boolean;
 }
 
-const { texto = "Consultar por WhatsApp", grande = false } = Astro.props;
+const { texto = "Consultar por WhatsApp", grande = false, compacto = false } = Astro.props;
 const href = waHref(empresa.whatsapp);
 const dimension = grande
   ? "px-7 py-3.5 text-base gap-2.5"
@@ -54,7 +56,7 @@ const dimension = grande
       >
         <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
       </svg>
-      {texto} · Próximamente
+      {texto}<span class={compacto ? "hidden lg:inline" : ""}>&nbsp;· Próximamente</span>
     </span>
   )
 }

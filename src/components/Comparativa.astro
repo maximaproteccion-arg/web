@@ -22,14 +22,41 @@ const filas = [
 ];
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-16 md:py-24">
-  <h2 class="text-center text-3xl font-extrabold tracking-tight text-navy">
+<section class="mx-auto max-w-6xl px-4 py-12 md:py-24">
+  <h2 class="text-center text-2xl font-extrabold tracking-tight text-navy md:text-3xl">
     Comparanos, en serio
   </h2>
   <p class="mx-auto mt-3 max-w-2xl text-center text-navy/70">
     Lo mismo que un kit de internet no te da, y lo mismo que a una multinacional le sobra cobrarte.
   </p>
-  <div class="mt-10 overflow-x-auto">
+
+  <!-- Móvil: una tarjeta por concepto, sin scroll lateral -->
+  <div class="mt-8 space-y-4 md:hidden">
+    {
+      filas.map((f) => (
+        <div class="overflow-hidden rounded-xl border border-navy/10 bg-white shadow-sm">
+          <p class="bg-navy px-4 py-2.5 text-sm font-bold text-white">{f.concepto}</p>
+          <dl class="divide-y divide-navy/10 text-sm">
+            <div class="flex items-start justify-between gap-3 px-4 py-2.5">
+              <dt class="shrink-0 text-navy/60">Kit de internet</dt>
+              <dd class="text-right text-navy/80">{f.kit}</dd>
+            </div>
+            <div class="flex items-start justify-between gap-3 bg-gold-soft px-4 py-2.5">
+              <dt class="shrink-0 font-bold text-navy">Máxima Protección</dt>
+              <dd class="text-right font-bold text-navy">{f.mp}</dd>
+            </div>
+            <div class="flex items-start justify-between gap-3 px-4 py-2.5">
+              <dt class="shrink-0 text-navy/60">Multinacional</dt>
+              <dd class="text-right text-navy/80">{f.multi}</dd>
+            </div>
+          </dl>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Escritorio: tabla completa -->
+  <div class="mt-10 hidden overflow-x-auto md:block">
     <table class="w-full min-w-[640px] border-collapse text-sm">
       <thead>
         <tr class="bg-navy text-white">

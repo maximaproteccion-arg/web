@@ -12,18 +12,71 @@ const enlaces = [
 ---
 
 <header class="sticky top-0 z-40 border-b border-navy/10 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-    <a href="#" class="flex items-center gap-2" aria-label={empresa.nombreComercial}>
-      <img src="/images/logo-mp.jpg" alt="" class="h-10 w-auto" width="40" height="40" />
-      <span class="text-lg font-bold tracking-widest">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+    <a href="#" class="flex min-w-0 items-center gap-2" aria-label={empresa.nombreComercial}>
+      <img src="/images/logo-mp.jpg" alt="" class="h-9 w-auto md:h-10" width="40" height="40" />
+      <span class="truncate text-base font-bold tracking-widest sm:text-lg">
         <span class="text-gold">Máxima</span><span class="text-navy">protección</span>
       </span>
     </a>
+
     <nav class="hidden items-center gap-6 text-sm font-semibold text-navy/80 md:flex" aria-label="Principal">
       {enlaces.map((e) => (
         <a href={e.href} class="transition hover:text-navy">{e.label}</a>
       ))}
     </nav>
-    <CtaWhatsapp texto="WhatsApp" />
+
+    <div class="hidden md:block">
+      <CtaWhatsapp texto="WhatsApp" compacto />
+    </div>
+
+    <button
+      id="btn-menu"
+      type="button"
+      class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-navy/15 text-navy md:hidden"
+      aria-label="Abrir menú"
+      aria-controls="menu-movil"
+      aria-expanded="false"
+    >
+      <svg
+        class="size-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="menu-movil" class="hidden border-t border-navy/10 bg-white px-4 pb-5 md:hidden">
+    <nav aria-label="Principal móvil">
+      {enlaces.map((e) => (
+        <a href={e.href} class="block border-b border-navy/5 py-3 font-semibold text-navy/80">
+          {e.label}
+        </a>
+      ))}
+    </nav>
+    <div class="pt-4">
+      <CtaWhatsapp texto="Consultar por WhatsApp" />
+    </div>
   </div>
 </header>
+
+<script>
+  const boton = document.getElementById("btn-menu");
+  const menu = document.getElementById("menu-movil");
+  boton?.addEventListener("click", () => {
+    const abierto = !menu?.classList.toggle("hidden");
+    boton.setAttribute("aria-expanded", String(abierto));
+  });
+  menu?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+      boton?.setAttribute("aria-expanded", "false");
+    }),
+  );
+</script>

@@ -15,7 +15,9 @@ const [principal, ...resto] = producto.fotos;
       <img
         src={principal}
         alt={`Foto de ${nombreProducto(producto)}`}
-        class="w-full rounded-2xl object-cover shadow-md"
+        class="h-auto w-full rounded-2xl object-cover shadow-md"
+        width="500"
+        height="500"
         loading="lazy"
       />
       {resto.length > 0 && (
