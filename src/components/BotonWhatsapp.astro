@@ -1,0 +1,33 @@
+---
+import { empresa } from "../data/empresa";
+import { waHref } from "../lib/whatsapp";
+
+// Flotante. Sin número no se renderiza: un botón flotante muerto que
+// persigue el scroll es peor que ninguno.
+const href = waHref(empresa.whatsapp);
+---
+
+{
+  href && (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener"
+      aria-label="Escribinos por WhatsApp"
+      class="fixed right-5 bottom-5 z-50 flex size-14 items-center justify-center rounded-full bg-gold text-navy-deep shadow-lg transition hover:scale-105"
+    >
+      <svg
+        class="size-7"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      </svg>
+    </a>
+  )
+}

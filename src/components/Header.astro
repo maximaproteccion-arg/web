@@ -1,0 +1,29 @@
+---
+import { empresa } from "../data/empresa";
+import CtaWhatsapp from "./CtaWhatsapp.astro";
+
+const enlaces = [
+  { href: "#la-alarma", label: "La alarma" },
+  { href: "#como-funciona", label: "Cómo funciona" },
+  { href: "#por-que-nosotros", label: "Por qué nosotros" },
+  { href: "#preguntas", label: "Preguntas" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-navy/10 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href="#" class="flex items-center gap-2" aria-label={empresa.nombreComercial}>
+      <img src="/images/logo-mp.jpg" alt="" class="h-10 w-auto" width="40" height="40" />
+      <span class="text-lg font-extrabold tracking-tight">
+        <span class="text-gold">Máxima</span><span class="text-navy">protección</span>
+      </span>
+    </a>
+    <nav class="hidden items-center gap-6 text-sm font-semibold text-navy/80 md:flex" aria-label="Principal">
+      {enlaces.map((e) => (
+        <a href={e.href} class="transition hover:text-navy">{e.label}</a>
+      ))}
+    </nav>
+    <CtaWhatsapp texto="WhatsApp" />
+  </div>
+</header>

@@ -1,0 +1,60 @@
+---
+import { empresa } from "../data/empresa";
+import { waHref } from "../lib/whatsapp";
+
+interface Props {
+  texto?: string;
+  grande?: boolean;
+}
+
+const { texto = "Consultar por WhatsApp", grande = false } = Astro.props;
+const href = waHref(empresa.whatsapp);
+const dimension = grande
+  ? "px-7 py-3.5 text-base gap-2.5"
+  : "px-5 py-2.5 text-sm gap-2";
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener"
+      class={`inline-flex items-center rounded-lg bg-gold font-bold text-navy-deep shadow-sm transition hover:brightness-105 active:scale-[0.98] ${dimension}`}
+    >
+      <svg
+        class="size-5 shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      </svg>
+      {texto}
+    </a>
+  ) : (
+    <span
+      class={`inline-flex cursor-not-allowed items-center rounded-lg border-2 border-dashed border-gold/60 bg-gold-soft font-bold text-navy/60 ${dimension}`}
+      title="Estamos actualizando nuestras líneas de atención"
+      aria-disabled="true"
+    >
+      <svg
+        class="size-5 shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      </svg>
+      {texto} · Próximamente
+    </span>
+  )
+}
