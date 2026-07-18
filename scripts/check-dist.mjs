@@ -27,7 +27,7 @@ check(html.includes("MAXIMA PROTECCION LA PLATA S.A."), "Falta la razón social"
 
 if (activo) {
   check(html.includes("https://wa.me/549"), "Modo activo: falta el enlace wa.me");
-  check(!html.includes("· Próximamente"), "Modo activo: quedó un CTA desactivado");
+  check(!html.includes("Próximamente"), "Modo activo: quedó un CTA desactivado");
 } else {
   check(!html.includes("wa.me"), "Con whatsapp=null no debe haber ningún enlace wa.me");
   check(html.includes("Próximamente"), "Falta el estado Próximamente en los CTA");

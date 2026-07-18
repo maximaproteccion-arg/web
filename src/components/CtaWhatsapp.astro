@@ -5,14 +5,14 @@ import { waHref } from "../lib/whatsapp";
 interface Props {
   texto?: string;
   grande?: boolean;
-  /** En espacios angostos (header) oculta el sufijo "Próximamente" salvo en lg+ */
+  /** En espacios angostos (header) oculta el pill "Próximamente" salvo en lg+ */
   compacto?: boolean;
 }
 
 const { texto = "Consultar por WhatsApp", grande = false, compacto = false } = Astro.props;
 const href = waHref(empresa.whatsapp);
 const dimension = grande
-  ? "px-7 py-3.5 text-base gap-2.5"
+  ? "px-7 py-4 text-base gap-2.5 w-full sm:w-auto"
   : "px-5 py-2.5 text-sm gap-2";
 ---
 
@@ -22,7 +22,7 @@ const dimension = grande
       href={href}
       target="_blank"
       rel="noopener"
-      class={`inline-flex items-center rounded-lg bg-gold font-bold text-navy-deep shadow-sm transition hover:brightness-105 active:scale-[0.98] ${dimension}`}
+      class={`inline-flex items-center justify-center rounded-xl bg-gold font-bold text-navy-deep shadow-sm transition hover:brightness-105 active:scale-[0.98] ${dimension}`}
     >
       <svg
         class="size-5 shrink-0"
@@ -40,7 +40,7 @@ const dimension = grande
     </a>
   ) : (
     <span
-      class={`inline-flex cursor-not-allowed items-center rounded-lg border-2 border-dashed border-gold/60 bg-gold-soft font-bold text-navy/60 ${dimension}`}
+      class={`inline-flex cursor-not-allowed items-center justify-center rounded-xl border border-navy/15 bg-white/80 font-bold whitespace-nowrap text-navy/60 backdrop-blur ${dimension}`}
       title="Estamos actualizando nuestras líneas de atención"
       aria-disabled="true"
     >
@@ -56,7 +56,12 @@ const dimension = grande
       >
         <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
       </svg>
-      {texto}<span class={compacto ? "hidden lg:inline" : ""}>&nbsp;· Próximamente</span>
+      {texto}
+      <span
+        class={`rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 text-[10px] font-extrabold tracking-wide text-navy/70 uppercase ${compacto ? "hidden lg:inline-block" : ""}`}
+      >
+        Próximamente
+      </span>
     </span>
   )
 }
