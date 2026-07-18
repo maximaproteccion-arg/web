@@ -1,0 +1,42 @@
+---
+import { producto, nombreProducto } from "../data/producto";
+
+interface Props {
+  clase?: string;
+}
+
+const { clase = "" } = Astro.props;
+const [principal, ...resto] = producto.fotos;
+---
+
+{
+  principal ? (
+    <figure class={clase}>
+      <img
+        src={principal}
+        alt={`Foto de ${nombreProducto(producto)}`}
+        class="w-full rounded-2xl object-cover shadow-md"
+        loading="lazy"
+      />
+      {resto.length > 0 && (
+        <div class="mt-3 grid grid-cols-3 gap-3">
+          {resto.map((foto, i) => (
+            <img
+              src={foto}
+              alt={`Foto ${i + 2} de ${nombreProducto(producto)}`}
+              class="aspect-square w-full rounded-xl object-cover"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      )}
+    </figure>
+  ) : (
+    <div
+      class={`flex flex-col items-center justify-center gap-3 rounded-2xl border border-navy/10 bg-cloud p-10 text-center ${clase}`}
+    >
+      <img src="/images/logo-mp.jpg" alt="" class="h-20 w-auto opacity-70" loading="lazy" />
+      <p class="text-sm font-semibold text-navy/60">Fotos del equipo: muy pronto</p>
+    </div>
+  )
+}
