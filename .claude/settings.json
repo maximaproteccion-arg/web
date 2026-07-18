@@ -46,7 +46,9 @@
       "Bash(grep -o '\\\\$304\\\\.500\\\\|\\\\$31\\\\.500\\\\|\\\\$132\\\\.300\\\\|\\\\$252\\\\.000\\\\|Consultar stock\\\\|ZN12' dist/index.html)",
       "Bash(mkdir -p producto)",
       "Bash(mv \"Kitalarmazenityxn10proloragwifiappsensorescontrol.webp\" \"producto/kit-zn10-pro.webp\")",
-      "Bash(mv \"CP-D02-Lora.jpg\" \"producto/sensor-puerta-cp-d02.jpg\")"
+      "Bash(mv \"CP-D02-Lora.jpg\" \"producto/sensor-puerta-cp-d02.jpg\")",
+      "Bash(mkdir -p src/assets)",
+      "Bash(mv public/images/producto/sensor-apertura-fondo.png src/assets/hero-sensor-puerta.png)"
     ]
   }
 }

@@ -21,10 +21,7 @@ export const producto: Producto = {
   disponible: true,
   nombre: null,
   marca: null,
-  fotos: [
-    "/images/producto/alarma-kit.webp",
-    "/images/producto/sensor-apertura.jpg",
-  ],
+  fotos: ["/images/producto/alarma-kit.webp"],
   caracteristicas: [
     {
       icono: "app",
