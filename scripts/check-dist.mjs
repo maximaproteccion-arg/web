@@ -10,6 +10,19 @@ for (const viejo of ["6136661", "4706262", "4792520", "Calle 23", "calle 23"]) {
   check(!html.includes(viejo), `Dato de contacto viejo presente: "${viejo}"`);
 }
 
+// Costos del proveedor: JAMÁS deben publicarse (solo precios finales de venta).
+// Lista de costos que no coinciden con ningún precio de venta vigente.
+for (const costo of [
+  "217.500", "22.500", "27.000", "67.500", "7.500", "43.500", "12.600",
+  "225.000", "180.000", "73.500", "8.700", "82.500", "24.000",
+]) {
+  check(!html.includes(`$${costo}`), `Costo del proveedor publicado: $${costo}`);
+}
+
+// Producto: marca y modelo presentes
+check(html.includes("Zenity"), "Falta la marca Zenity");
+check(html.includes("ZN10 PRO"), "Falta el modelo ZN10 PRO");
+
 // Identidad legal: presente siempre
 check(html.includes("30-71103275-0"), "Falta el CUIT en el HTML");
 check(html.includes("1739"), "Falta el número de prestadora");

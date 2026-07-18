@@ -1,0 +1,52 @@
+---
+import { accesorios, categorias } from "../data/accesorios";
+import { fmtPesos } from "../lib/precios";
+
+// Los "sin-stock" quedan en los datos pero no se publican.
+const visibles = accesorios.filter((a) => a.stock !== "sin-stock");
+const grupos = categorias
+  .map((c) => ({ categoria: c, items: visibles.filter((a) => a.categoria === c) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<section id="accesorios" class="scroll-mt-20 border-t border-navy/10">
+  <div class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+    <h2 class="text-center text-3xl font-extrabold tracking-tight text-navy">
+      Armá tu sistema a medida
+    </h2>
+    <p class="mx-auto mt-3 max-w-2xl text-center text-navy/70">
+      El panel admite hasta 200 accesorios. Estos son los más pedidos — se combinan
+      según tu casa o comercio, y el asesor te ayuda a elegir.
+    </p>
+
+    {
+      grupos.map((g) => (
+        <div class="mt-12">
+          <h3 class="text-sm font-bold tracking-wide text-navy/60 uppercase">{g.categoria}</h3>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {g.items.map((a) => (
+              <div class="flex flex-col rounded-xl border border-navy/10 bg-white p-5 shadow-sm">
+                <div class="flex items-start justify-between gap-2">
+                  <h4 class="font-bold text-navy">{a.nombre}</h4>
+                  {a.stock === "consultar" && (
+                    <span class="shrink-0 rounded-full bg-gold-soft px-2.5 py-0.5 text-[10px] font-bold text-navy uppercase">
+                      Consultar stock
+                    </span>
+                  )}
+                </div>
+                <p class="mt-1 text-xs text-navy/50">{a.codigo}</p>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-navy/70">{a.descripcion}</p>
+                <p class="mt-3 text-lg font-extrabold text-navy">{fmtPesos(a.precio)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <p class="mt-10 text-center text-xs text-navy/50">
+      Precios de lista en pesos argentinos, sujetos a modificación sin previo aviso.
+      Consultanos por kits y promociones.
+    </p>
+  </div>
+</section>

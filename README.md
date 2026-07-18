@@ -15,11 +15,16 @@ Landing estática de la alarma automonitoreada. Astro + Tailwind 4.
 
 **Todo el contenido variable vive en `src/data/`. No hay que tocar componentes.**
 
-### Cuando llegue el producto (`src/data/producto.ts`)
+### Producto (`src/data/producto.ts` y `src/data/accesorios.ts`)
 
-1. Copiar las fotos a `public/images/producto/` y listarlas en `fotos`.
-2. Completar `nombre`, `marca`, `especificaciones` y `precio`.
-3. Poner `disponible: true` (desaparece el "Próximamente").
+El panel Zenity Smart ZN10 PRO y el catálogo de accesorios ya están cargados.
+Falta: copiar las fotos a `public/images/producto/` y listarlas en `fotos`.
+
+**Regla de precios:** en el repo van únicamente los **precios finales de venta**.
+Los costos del proveedor y el margen no se escriben en ningún archivo (el repo es
+público). Para actualizar precios: pasarle a Claude la lista nueva del proveedor
+y pedirle que recalcule. `npm run verify` falla si un costo conocido del
+proveedor aparece publicado.
 
 ### Cuando haya WhatsApp nuevo (`src/data/empresa.ts`)
 

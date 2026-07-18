@@ -189,7 +189,8 @@ Antes de dar por terminado, con el sitio corriendo:
 | Confirmar que la habilitación N° 1739 sigue vigente en 2026 | **Bloqueante.** El listado verificado es de julio 2024. El sitio lo afirma; debe estar vigente |
 | Limpiar el rastro del hackeo en Google (Search Console, desindexado del spam) | **Bloqueante para publicar en el dominio propio** |
 | Dirección nueva | No bloquea. Sin ella el sitio funciona, pero se pierde el posicionamiento en el mapa de Google y la comparativa pierde algo de fuerza |
-| Modelo, fotos, precio y características del producto | No bloquea. El sitio se publica con placeholders y se completa después |
+| Modelo, precio y características del producto | ✅ Resuelto: panel Zenity Smart ZN10 PRO + catálogo de 16 accesorios, con precios finales de venta. En el repo (público) van SOLO precios de venta: los costos del proveedor y el margen no se escriben en ningún archivo |
+| Fotos reales del producto | No bloquea. Falta recibirlas como archivos de imagen; mientras tanto rige el placeholder |
 | Dominio `maximaproteccion.com.ar` | ✅ Resuelto: el cliente lo tiene |
 | Repositorio GitHub | ✅ Resuelto: `maximaproteccion-arg/web` |
 

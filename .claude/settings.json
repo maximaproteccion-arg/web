@@ -34,7 +34,16 @@
       "Read(//c/Users/Usuario/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/**)",
       "Bash(\"/c/Users/Usuario/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/scripts/start-server.sh\" --project-dir \"/c/Users/Usuario/Desktop/maxproteccion-web\")",
       "Bash(gh auth *)",
-      "Bash(gh repo *)"
+      "Bash(gh repo *)",
+      "Bash(npx astro *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}, %{size_download} bytes\\\\n\" http://localhost:4321/)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(curl -s -o /dev/null -w \"logo: HTTP %{http_code}\\\\n\" http://localhost:4321/images/logo-mp.jpg)",
+      "Bash(curl -s -o /dev/null -w \"favicon: HTTP %{http_code}\\\\n\" http://localhost:4321/favicon.svg)",
+      "Bash(curl -s -o /dev/null -w \"robots: HTTP %{http_code}\\\\n\" http://localhost:4321/robots.txt)",
+      "Bash(curl -s -o /dev/null -w \"sitemap: HTTP %{http_code}\\\\n\" http://localhost:4321/sitemap-index.xml)",
+      "Bash(kill %1)",
+      "Bash(grep -o '\\\\$304\\\\.500\\\\|\\\\$31\\\\.500\\\\|\\\\$132\\\\.300\\\\|\\\\$252\\\\.000\\\\|Consultar stock\\\\|ZN12' dist/index.html)"
     ]
   }
 }
