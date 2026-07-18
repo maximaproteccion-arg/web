@@ -1,0 +1,39 @@
+---
+import { empresa } from "../data/empresa";
+
+const anio = new Date().getFullYear();
+---
+
+<footer class="bg-navy-deep text-white/70">
+  <div class="mx-auto max-w-6xl space-y-4 px-4 py-10 text-center text-xs leading-relaxed">
+    <img
+      src="/images/logo-mp.jpg"
+      alt={empresa.nombreComercial}
+      class="mx-auto h-12 w-auto rounded"
+      loading="lazy"
+    />
+    <p>
+      {empresa.razonSocial} · CUIT {empresa.cuit}
+      <br />
+      Prestadora de seguridad privada N° {empresa.prestadora}, habilitada por el
+      Ministerio de Seguridad de la Provincia de Buenos Aires · Ley {empresa.ley} ·
+      Seguros de vida, responsabilidad civil y ART.
+    </p>
+    <p>
+      <a
+        href={empresa.redes.facebook}
+        target="_blank"
+        rel="noopener"
+        class="underline underline-offset-2 hover:text-white">Facebook</a
+      >
+      {" · "}
+      <a
+        href={empresa.redes.instagram}
+        target="_blank"
+        rel="noopener"
+        class="underline underline-offset-2 hover:text-white">Instagram</a
+      >
+    </p>
+    <p>© {anio} {empresa.razonSocial} — {empresa.ciudad}, {empresa.provincia}, Argentina.</p>
+  </div>
+</footer>

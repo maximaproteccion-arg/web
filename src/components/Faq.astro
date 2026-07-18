@@ -1,0 +1,49 @@
+---
+// Incluye la objeción central al automonitoreo ("¿y si no miro el celular?"),
+// respondida de frente (spec §4.8).
+const preguntas = [
+  {
+    q: "¿De verdad no pago abono?",
+    a: "De verdad. El equipo es tuyo y te avisa directamente a tu celular: no hay cuota mensual ni contrato de permanencia.",
+  },
+  {
+    q: "¿Y si no estoy mirando el celular?",
+    a: "La alarma no depende de un solo aviso: dispara la sirena en el momento y puede notificar también a las personas que elijas — familia, vecinos, quien quieras. Con la video verificación, apenas tomás el teléfono ves qué pasó: no adivinás. Y si además querés que una central profesional la vigile por vos, también somos empresa de monitoreo: hablemos.",
+  },
+  {
+    q: "¿Qué pasa si se corta la luz o internet?",
+    a: "El equipo cuenta con respaldo para seguir funcionando ante cortes. Las especificaciones completas del modelo las publicamos junto con el lanzamiento.",
+  },
+  {
+    q: "¿La instalación es complicada?",
+    a: "Para vos, no: la hacen nuestros técnicos, es rápida y prolija, y te vas con la app configurada y sabiendo usarla.",
+  },
+  {
+    q: "¿Sirve para un comercio?",
+    a: "Sí. La configuramos a medida para casas, departamentos y comercios de La Plata y alrededores.",
+  },
+];
+---
+
+<section id="preguntas" class="scroll-mt-20 border-y border-navy/10 bg-cloud">
+  <div class="mx-auto max-w-3xl px-4 py-16 md:py-24">
+    <h2 class="text-center text-3xl font-extrabold tracking-tight text-navy">
+      Preguntas frecuentes
+    </h2>
+    <div class="mt-10 space-y-3">
+      {
+        preguntas.map((p) => (
+          <details class="group rounded-xl bg-white p-5 shadow-sm">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
+              {p.q}
+              <span class="text-gold transition group-open:rotate-45" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <p class="mt-3 text-sm leading-relaxed text-navy/70">{p.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+import { empresa } from "../data/empresa";
+import CtaWhatsapp from "./CtaWhatsapp.astro";
+---
+
+<section id="contacto" class="scroll-mt-20">
+  <div class="mx-auto max-w-3xl px-4 py-16 text-center md:py-24">
+    <h2 class="text-3xl font-extrabold tracking-tight text-navy">Hablemos</h2>
+    {
+      empresa.whatsapp ? (
+        <p class="mt-4 text-navy/70">
+          Escribinos y un asesor te responde para armar la mejor solución para tu casa o comercio.
+        </p>
+      ) : (
+        <p class="mt-4 text-navy/70">
+          Estamos renovando nuestros canales de atención. Muy pronto vas a poder
+          escribirnos por WhatsApp directamente desde acá.
+        </p>
+      )
+    }
+    <div class="mt-8">
+      <CtaWhatsapp grande />
+    </div>
+    {
+      (empresa.telefono || empresa.direccion || empresa.horario) && (
+        <div class="mt-10 grid gap-6 text-sm sm:grid-cols-3">
+          {empresa.telefono && (
+            <div>
+              <h3 class="font-bold text-navy">Teléfono</h3>
+              <p class="mt-1 text-navy/70">{empresa.telefono}</p>
+            </div>
+          )}
+          {empresa.direccion && (
+            <div>
+              <h3 class="font-bold text-navy">Oficina</h3>
+              <p class="mt-1 text-navy/70">
+                {empresa.direccion}, {empresa.ciudad}
+              </p>
+            </div>
+          )}
+          {empresa.horario && (
+            <div>
+              <h3 class="font-bold text-navy">Horario</h3>
+              <p class="mt-1 text-navy/70">{empresa.horario}</p>
+            </div>
+          )}
+        </div>
+      )
+    }
+    <p class="mt-10 text-sm font-semibold text-navy/60">Mientras tanto, encontranos en</p>
+    <div class="mt-3 flex justify-center gap-4">
+      <a
+        href={empresa.redes.facebook}
+        target="_blank"
+        rel="noopener"
+        class="font-bold text-navy underline decoration-gold decoration-2 underline-offset-4"
+      >
+        Facebook
+      </a>
+      <a
+        href={empresa.redes.instagram}
+        target="_blank"
+        rel="noopener"
+        class="font-bold text-navy underline decoration-gold decoration-2 underline-offset-4"
+      >
+        Instagram
+      </a>
+    </div>
+  </div>
+</section>
