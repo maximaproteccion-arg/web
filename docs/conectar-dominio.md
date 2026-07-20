@@ -40,26 +40,43 @@ autoritativa. Los del paso 2 son la referencia habitual.
 
 ---
 
-## Paso 2 — Cargar el DNS en NIC.ar
+## Paso 2 — Delegar el dominio en NIC.ar
 
-Entrar a [nic.ar](https://nic.ar) con Clave Fiscal → **Mis dominios** →
-`maximaproteccion.com.ar` → administrar DNS / editar zona.
+**NIC.ar no permite cargar registros A ni CNAME.** Solo hace *delegación*: se le
+indica qué servidores de nombres (nameservers) mandan sobre el dominio, y esos
+servidores son los que después resuelven los registros.
 
-Cargar lo que indique Vercel, que normalmente es:
+Por eso el registro `A → 216.198.79.1` que muestra Vercel **no se carga en
+NIC.ar**. Se delega el dominio a Vercel y Vercel crea ese registro solo.
 
-| Tipo | Nombre | Valor |
+En [nic.ar](https://nic.ar) → **Mis dominios** → `maximaproteccion.com.ar` →
+**Delegaciones** → *Agregar una nueva delegación*, cargar dos entradas:
+
+| Host | IPv4 | IPv6 |
 |---|---|---|
-| A | `@` (o vacío) | `76.76.21.21` |
-| CNAME | `www` | `cname.vercel-dns.com` |
+| `ns1.vercel-dns.com` | *(vacío)* | *(vacío)* |
+| `ns2.vercel-dns.com` | *(vacío)* | *(vacío)* |
 
-**Verificar siempre contra lo que muestra el panel de Vercel** antes de guardar.
+Guardar cada una con el ícono de diskette y después **EJECUTAR CAMBIOS**.
 
-**Si NIC.ar no permite cargar registros A/CNAME**, hay que delegar el dominio a
-un DNS externo gratuito (Cloudflare es el estándar) cambiando los nameservers, y
-cargar los mismos registros ahí.
+Los campos IPv4/IPv6 se dejan vacíos: solo hacen falta cuando el nameserver
+pertenece al mismo dominio que se delega, que no es el caso. Si el formulario
+los exigiera, los valores verificados son `198.51.44.13` y `198.51.45.13`
+respectivamente.
 
-La propagación tarda entre unos minutos y 24 horas. Vercel emite el certificado
-HTTPS solo, apenas detecta el dominio apuntado.
+La propagación tarda entre unos minutos y 24 horas. Cuando termine, Vercel pasa
+de "Invalid Configuration" a válido y emite el certificado HTTPS solo.
+
+### Consecuencia a tener en cuenta
+
+Al delegar a Vercel, **toda la zona DNS pasa a administrarse desde Vercel**
+(Settings → Domains → Vercel DNS). Si más adelante se configura el email
+corporativo `contacto@maximaproteccion.com.ar`, los registros MX se cargan ahí,
+no en NIC.ar.
+
+La alternativa es delegar a Cloudflare (nameservers propios, panel DNS más
+completo y gratis) y cargar ahí el registro A que pide Vercel. Es un paso más,
+pero conviene si se va a manejar email además del sitio.
 
 ---
 
