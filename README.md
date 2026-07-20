@@ -42,17 +42,17 @@ Después de cualquier cambio: `npm run verify`.
 
 ## Deploy
 
-**Preview actual:** https://lexagisargentina.github.io/ (GitHub Pages, repo
-`lexagisargentina/lexagisargentina.github.io`). Lleva `noindex` para que Google
-no lo indexe: es solo para revisar.
+**Producción:** cada push a `main` construye y despliega solo vía GitHub Actions
+(`.github/workflows/deploy.yml`). El despliegue **falla** si los tests o las
+invariantes de contenido no pasan, así que nunca sale a la calle un sitio con
+datos viejos, marca del proveedor o precios publicados.
 
-Proceso: `npm run verify`, copiar `dist/` al repo de Pages (agregando
-`.nojekyll` y el meta `noindex`) y pushear a `main`.
+Para conectar el dominio `maximaproteccion.com.ar` (NIC.ar): ver
+[docs/conectar-dominio.md](docs/conectar-dominio.md) — incluye los registros DNS
+exactos y los pasos de HTTPS y Search Console.
 
-**Producción (cuando se levanten los bloqueantes):** el dominio
-maximaproteccion.com.ar está comprado en NIC.ar. Falta elegir host definitivo
-(el mismo GitHub Pages con dominio propio, o Cloudflare Pages) y apuntar el DNS.
-Al pasar a producción, quitar el `noindex` y dar de baja el preview.
+**Preview:** https://lexagisargentina.github.io/ (repo personal, con `noindex`).
+Se da de baja cuando producción esté en el dominio propio.
 
 ## Documentación
 
