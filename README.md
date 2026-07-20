@@ -42,10 +42,11 @@ Después de cualquier cambio: `npm run verify`.
 
 ## Deploy
 
-**Producción:** cada push a `main` construye y despliega solo vía GitHub Actions
-(`.github/workflows/deploy.yml`). El despliegue **falla** si los tests o las
-invariantes de contenido no pasan, así que nunca sale a la calle un sitio con
-datos viejos, marca del proveedor o precios publicados.
+**Producción: Vercel**, conectado al repo. Cada push a `main` construye y publica
+solo; cada rama genera un preview. El build (definido en `vercel.json`) corre
+tests + build + verificación de invariantes: **si los tests fallan, o si
+reaparecen la marca del proveedor, un precio o los datos de contacto viejos, el
+deploy se aborta y no publica nada**.
 
 Para conectar el dominio `maximaproteccion.com.ar` (NIC.ar): ver
 [docs/conectar-dominio.md](docs/conectar-dominio.md) — incluye los registros DNS

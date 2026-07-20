@@ -1,38 +1,42 @@
 # Conectar maximaproteccion.com.ar
 
-Guía para publicar el sitio en el dominio propio. Tres pasos: activar el
-despliegue, cargar el DNS en NIC.ar, y activar HTTPS.
+El sitio se despliega en **Vercel**, conectado al repo `maximaproteccion-arg/web`.
+Cada push a `main` construye y publica solo; cada rama genera un preview.
 
-El sitio se sirve desde **GitHub Pages** con el repo `maximaproteccion-arg/web`.
-Cada push a `main` construye y despliega solo (workflow `.github/workflows/deploy.yml`),
-y el despliegue falla si los tests o las invariantes de contenido no pasan.
+El build corre `npm run test && npm run build && node scripts/check-dist.mjs`
+(definido en `vercel.json`), así que **si los tests fallan, o si reaparecen la
+marca del proveedor, un precio o los datos de contacto viejos, el deploy se
+aborta y no publica nada**.
 
 ---
 
-## Antes de empezar: qué se hace público
+## Antes de conectar el dominio: qué se hace público
 
-Al completar el paso 2, el sitio queda visible para cualquiera y Google puede
-empezar a indexarlo. Conviene revisar:
+Al apuntar el DNS, el sitio queda visible y Google puede indexarlo. Revisar:
 
 - [ ] **WhatsApp cargado en `src/data/empresa.ts`.** Si sigue en `null`, los
       botones dicen "Próximamente" y **el sitio no puede recibir consultas**.
       Es la única vía de conversión.
 - [ ] **Habilitación N° 1739 vigente.** El sitio la afirma en varios lugares.
-- [ ] **Google Search Console** dado de alta para limpiar el rastro del hackeo
-      del sitio anterior (paso 4).
+- [ ] **Google Search Console** para limpiar el rastro del hackeo (paso 3).
 
 ---
 
-## Paso 1 — Activar GitHub Pages (una sola vez)
+## Paso 1 — Agregar el dominio en Vercel
 
-Con la cuenta **maximaproteccion-arg**, en el repo `web`:
+En el panel de Vercel, proyecto **web**:
 
-1. **Settings → Pages**
-2. En *Build and deployment* → *Source*, elegir **GitHub Actions**
-3. Listo. No hace falta elegir rama.
+1. **Settings → Domains**
+2. Agregar `maximaproteccion.com.ar`
+3. Agregar también `www.maximaproteccion.com.ar` y dejarlo **redirigiendo** al
+   dominio sin www.
 
-Después, en **Actions**, verificar que el workflow "Desplegar sitio" corrió en
-verde. La primera vez puede requerir aprobar la ejecución de workflows.
+Se usa el dominio **sin www** como dirección oficial: es la que tenía el sitio
+anterior y la que Google ya conoce, así se conserva la antigüedad del dominio.
+
+Al agregarlo, **Vercel muestra en pantalla los registros DNS exactos que hay que
+cargar**. Usar esos valores: Vercel los asigna por proyecto y son la fuente
+autoritativa. Los del paso 2 son la referencia habitual.
 
 ---
 
@@ -41,79 +45,52 @@ verde. La primera vez puede requerir aprobar la ejecución de workflows.
 Entrar a [nic.ar](https://nic.ar) con Clave Fiscal → **Mis dominios** →
 `maximaproteccion.com.ar` → administrar DNS / editar zona.
 
-Cargar estos registros:
-
-### Dominio raíz (`maximaproteccion.com.ar`) — 4 registros tipo A
+Cargar lo que indique Vercel, que normalmente es:
 
 | Tipo | Nombre | Valor |
 |---|---|---|
-| A | `@` (o vacío) | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
+| A | `@` (o vacío) | `76.76.21.21` |
+| CNAME | `www` | `cname.vercel-dns.com` |
 
-Son las cuatro IPs de GitHub Pages. Van las cuatro: si una se cae, el sitio
-sigue funcionando por las otras.
+**Verificar siempre contra lo que muestra el panel de Vercel** antes de guardar.
 
-### `www` — 1 registro tipo CNAME
+**Si NIC.ar no permite cargar registros A/CNAME**, hay que delegar el dominio a
+un DNS externo gratuito (Cloudflare es el estándar) cambiando los nameservers, y
+cargar los mismos registros ahí.
 
-| Tipo | Nombre | Valor |
-|---|---|---|
-| CNAME | `www` | `maximaproteccion-arg.github.io.` |
-
-(con el punto final, si el panel lo pide)
-
-Así `www.maximaproteccion.com.ar` redirige solo al dominio sin www, que es el
-que queda como dirección oficial — es el que tenía el sitio anterior y el que
-Google ya conoce.
-
-### Opcional: IPv6 — 4 registros tipo AAAA
-
-| Tipo | Nombre | Valor |
-|---|---|---|
-| AAAA | `@` | `2606:50c0:8000::153` |
-| AAAA | `@` | `2606:50c0:8001::153` |
-| AAAA | `@` | `2606:50c0:8002::153` |
-| AAAA | `@` | `2606:50c0:8003::153` |
-
-**Si el panel de NIC.ar no permite cargar registros A/CNAME**, hay que delegar el
-dominio a un DNS externo gratuito (Cloudflare es el estándar) y cargar los mismos
-registros ahí. Es un paso más, pero después la administración es más simple.
-
-La propagación tarda entre unos minutos y 24 horas.
+La propagación tarda entre unos minutos y 24 horas. Vercel emite el certificado
+HTTPS solo, apenas detecta el dominio apuntado.
 
 ---
 
-## Paso 3 — Activar HTTPS
+## Paso 3 — Limpiar el rastro del hackeo
 
-Cuando el DNS haya propagado, volver a **Settings → Pages** del repo:
-
-1. En *Custom domain* aparece `maximaproteccion.com.ar` (lo declara el workflow).
-   Debe mostrar un tilde verde de verificación.
-2. Marcar **Enforce HTTPS**.
-
-El certificado lo emite GitHub gratis y se renueva solo. Si la casilla aparece
-gris, esperar a que termine de propagar el DNS y recargar.
-
----
-
-## Paso 4 — Limpiar el rastro del hackeo
-
-El dominio sirvió spam de apuestas antes de que el hosting lo suspendiera. Ese
-contenido puede seguir indexado en Google y arrastrar la reputación del dominio.
+El dominio sirvió spam de apuestas antes de que el hosting anterior lo
+suspendiera. Ese contenido puede seguir indexado y arrastrar la reputación.
 
 1. Dar de alta el dominio en [Google Search Console](https://search.google.com/search-console)
    (verificación por registro TXT en NIC.ar).
 2. Enviar el sitemap: `https://maximaproteccion.com.ar/sitemap-index.xml`
 3. En *Seguridad y acciones manuales*, revisar si hay alguna marca por contenido
    comprometido y pedir la revisión.
-4. Las URLs viejas de spam devuelven 404 solas (ya no existen), que es lo que
-   Google necesita para desindexarlas.
+4. Las URLs viejas de spam ya no existen y devuelven 404, que es lo que Google
+   necesita para desindexarlas.
 
 ---
 
 ## Después de publicar
 
-- Dar de baja el preview `lexagisargentina.github.io` (repo personal, ya no hace
-  falta y conviene que no quede una copia dando vueltas).
+- Dar de baja el preview `lexagisargentina.github.io` (repo personal; conviene
+  que no quede una copia del sitio dando vueltas).
 - Actualizar las redes sociales con la dirección nueva.
+
+---
+
+## Notas técnicas
+
+- `vercel.json` define el build, las cabeceras de seguridad (HSTS, nosniff,
+  frame-options, referrer-policy, permissions-policy, CSP) y el cacheo
+  inmutable de los assets con hash.
+- El CSP permite scripts y estilos inline porque Astro incrusta el JSON-LD que
+  lee Google y el script del menú móvil. No es un riesgo relevante acá: el sitio
+  es estático, sin formularios, sin login y sin contenido de terceros.
