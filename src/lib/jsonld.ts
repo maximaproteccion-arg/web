@@ -14,7 +14,7 @@ export function datosEstructurados(e: Empresa): Record<string, unknown> {
     legalName: e.razonSocial,
     taxID: e.cuit,
     url: e.dominio,
-    logo: `${e.dominio}/images/logo-mp.jpg`,
+    logo: `${e.dominio}/images/logo-maxima-proteccion.webp`,
     sameAs: [e.redes.facebook, e.redes.instagram],
   };
   if (!e.direccion) return base;

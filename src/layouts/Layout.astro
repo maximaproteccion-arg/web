@@ -14,7 +14,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/images/logo-mp.jpg", Astro.site);
+const ogImage = new URL("/images/og-maxima-proteccion.jpg", Astro.site);
 const jsonld = JSON.stringify(datosEstructurados(empresa));
 ---
 
@@ -27,6 +27,7 @@ const jsonld = JSON.stringify(datosEstructurados(empresa));
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_AR" />
